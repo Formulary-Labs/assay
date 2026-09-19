@@ -1,6 +1,6 @@
 # assay
 
-Control assessment engine for compliance programs.
+Every control gets tested. Every response is validated against 7 criteria before it's accepted. If a run stops, it resumes exactly where it left off.
 
 ```bash
 go get github.com/Formulary-Labs/assay
@@ -8,9 +8,7 @@ go get github.com/Formulary-Labs/assay
 
 ## What it does
 
-`assay` reads a gemara `ControlCatalog` and a directory of product documentation, then systematically works through each control in batches. For each batch, it validates responses against 7 criteria before accepting them. When a run is interrupted, it resumes from the last saved checkpoint — no work is lost. When all batches are complete, it writes three output artifacts.
-
-The name is precise: an assay is a systematic test against defined criteria. Assessment without criteria is opinion.
+`assay` reads a gemara `ControlCatalog` and a directory of product documentation, then works through each control in batches. For each batch, it validates responses against 7 criteria before accepting them. When a run is interrupted, it resumes from the last saved checkpoint — no work is lost. When all batches are complete, it writes three output artifacts.
 
 ## Input
 
