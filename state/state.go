@@ -58,8 +58,13 @@ const (
 	CitationNotFound         CitationQuality = "citation_not_found"
 )
 
+// AssessmentStateSchemaVersion is the current schema version written to all
+// AssessmentState JSON files. Increment when fields are removed or renamed.
+const AssessmentStateSchemaVersion = "1.0"
+
 // AssessmentState is the full persistent state for a single assessment run.
 type AssessmentState struct {
+	SchemaVersion  string                   `json:"schema_version"`
 	RunID          string                   `json:"run_id"`
 	Program        string                   `json:"program"`
 	Framework      string                   `json:"framework"`

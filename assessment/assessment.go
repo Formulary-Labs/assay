@@ -31,6 +31,7 @@ func Init(runID, program, framework, productName, productVersion, catalogPath, p
 	}
 
 	s := &state.AssessmentState{
+		SchemaVersion:  state.AssessmentStateSchemaVersion,
 		RunID:          runID,
 		Program:        program,
 		Framework:      framework,
