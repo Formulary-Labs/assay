@@ -99,14 +99,14 @@ func controlToEntry(c *gemara.Control) *state.ControlEntry {
 	}
 }
 
-func controlRequirementText(c *gemara.Control) string {
+func controlRequirementText(c *gemara.Control) string { //nolint:unused // reserved for future batch prompts
 	if c.Objective != "" {
 		return c.Objective
 	}
 	return c.Title
 }
 
-func requirementText(req gemara.AssessmentRequirement) string {
+func requirementText(req gemara.AssessmentRequirement) string { //nolint:unused // reserved for future batch prompts
 	if req.Text != "" {
 		return req.Text
 	}
