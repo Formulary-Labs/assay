@@ -24,7 +24,7 @@ type AssembleResult struct {
 // Assemble produces all output files from a complete AssessmentState.
 // outputDir is created if it does not exist.
 func Assemble(s *state.AssessmentState, outputDir string) (AssembleResult, error) {
-	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+	if err := os.MkdirAll(outputDir, 0o750); err != nil {
 		return AssembleResult{}, fmt.Errorf("creating output dir: %w", err)
 	}
 
@@ -111,7 +111,7 @@ func writeMarkdownArtifact(s *state.AssessmentState, path string) error {
 		}
 	}
 
-	return os.WriteFile(path, []byte(b.String()), 0o644)
+	return os.WriteFile(path, []byte(b.String()), 0o600)
 }
 
 func writeGapReport(s *state.AssessmentState, path string) error {
@@ -179,7 +179,7 @@ func writeGapReport(s *state.AssessmentState, path string) error {
 		}
 	}
 
-	return os.WriteFile(path, []byte(b.String()), 0o644)
+	return os.WriteFile(path, []byte(b.String()), 0o600)
 }
 
 func writeJSONArtifact(s *state.AssessmentState, path string) error {
@@ -187,7 +187,7 @@ func writeJSONArtifact(s *state.AssessmentState, path string) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(path, data, 0o644)
+	return os.WriteFile(path, data, 0o600)
 }
 
 func pct(n, total int) float64 {

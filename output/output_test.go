@@ -30,30 +30,30 @@ func makeTestState() *state.AssessmentState {
 				Requirement: "Establish and maintain a policy for AI use.",
 				Status:      state.ControlPending,
 			},
-		"A.6.2": {
-			ID:          "A.6.2",
-			Title:       "AI Risk Register",
-			Requirement: "Maintain a risk register for AI systems.",
-			Status:      state.ControlValidated,
-			Response: &state.Response{
-				Determination:   state.Satisfied,
-				CitationQuality: state.DirectAssertion,
-				Citation:        "Section 4.3.1",
-				Narrative:       "Risk register is maintained and reviewed quarterly.",
+			"A.6.2": {
+				ID:          "A.6.2",
+				Title:       "AI Risk Register",
+				Requirement: "Maintain a risk register for AI systems.",
+				Status:      state.ControlValidated,
+				Response: &state.Response{
+					Determination:   state.Satisfied,
+					CitationQuality: state.DirectAssertion,
+					Citation:        "Section 4.3.1",
+					Narrative:       "Risk register is maintained and reviewed quarterly.",
+				},
 			},
-		},
-		"A.6.3": {
-			ID:          "A.6.3",
-			Title:       "AI Transparency",
-			Requirement: "Document AI system decisions.",
-			Status:      state.ControlValidated,
-			Response: &state.Response{
-				Determination:   state.NotSatisfied,
-				CitationQuality: state.CitationNotFound,
-				Gap:             "No documentation found.",
-				RemediationPath: "Create transparency report.",
+			"A.6.3": {
+				ID:          "A.6.3",
+				Title:       "AI Transparency",
+				Requirement: "Document AI system decisions.",
+				Status:      state.ControlValidated,
+				Response: &state.Response{
+					Determination:   state.NotSatisfied,
+					CitationQuality: state.CitationNotFound,
+					Gap:             "No documentation found.",
+					RemediationPath: "Create transparency report.",
+				},
 			},
-		},
 		},
 		Batches: []*state.Batch{
 			{

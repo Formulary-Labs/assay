@@ -37,63 +37,63 @@ const (
 type Determination string
 
 const (
-	Satisfied         Determination = "satisfied"
+	Satisfied          Determination = "satisfied"
 	PartiallySatisfied Determination = "partially_satisfied"
-	NotSatisfied      Determination = "not_satisfied"
-	NA                Determination = "na"
+	NotSatisfied       Determination = "not_satisfied"
+	NA                 Determination = "na"
 )
 
 // CitationQuality is the quality classification for a citation.
 type CitationQuality string
 
 const (
-	DirectAssertion         CitationQuality = "direct_assertion"
-	TopicalReference        CitationQuality = "topical_reference"
-	AdjacentCapability      CitationQuality = "adjacent_capability"
+	DirectAssertion          CitationQuality = "direct_assertion"
+	TopicalReference         CitationQuality = "topical_reference"
+	AdjacentCapability       CitationQuality = "adjacent_capability"
 	ArchitecturalDescription CitationQuality = "architectural_description"
-	CitationNotFound        CitationQuality = "citation_not_found"
+	CitationNotFound         CitationQuality = "citation_not_found"
 )
 
 // AssessmentState is the full persistent state for a single assessment run.
 type AssessmentState struct {
-	RunID          string                     `json:"run_id"`
-	Program        string                     `json:"program"`
-	Framework      string                     `json:"framework"`
-	ProductName    string                     `json:"product_name"`
-	ProductVersion string                     `json:"product_version"`
-	CatalogPath    string                     `json:"catalog_path"`
-	ProductSource  string                     `json:"product_source"`
-	Started        time.Time                  `json:"started"`
-	LastUpdated    time.Time                  `json:"last_updated"`
-	Status         Status                     `json:"status"`
-	BatchSize      int                        `json:"batch_size"`
-	Controls       map[string]*ControlEntry   `json:"controls"`
-	Batches        []*Batch                   `json:"batches"`
-	Summary        Summary                    `json:"summary"`
+	RunID          string                   `json:"run_id"`
+	Program        string                   `json:"program"`
+	Framework      string                   `json:"framework"`
+	ProductName    string                   `json:"product_name"`
+	ProductVersion string                   `json:"product_version"`
+	CatalogPath    string                   `json:"catalog_path"`
+	ProductSource  string                   `json:"product_source"`
+	Started        time.Time                `json:"started"`
+	LastUpdated    time.Time                `json:"last_updated"`
+	Status         Status                   `json:"status"`
+	BatchSize      int                      `json:"batch_size"`
+	Controls       map[string]*ControlEntry `json:"controls"`
+	Batches        []*Batch                 `json:"batches"`
+	Summary        Summary                  `json:"summary"`
 }
 
 // ControlEntry is a single control in the inventory.
 type ControlEntry struct {
-	ID             string        `json:"id"`
-	Title          string        `json:"title"`
-	Requirement    string        `json:"requirement"`
-	Severity       string        `json:"severity,omitempty"`  // CAT I/II/III, SL level, etc.
-	BatchIndex     int           `json:"batch_index"`
-	Status         ControlStatus `json:"status"`
-	Response       *Response     `json:"response,omitempty"`
-	ValidationFails int          `json:"validation_fails,omitempty"`
+	ID              string        `json:"id"`
+	Title           string        `json:"title"`
+	Requirement     string        `json:"requirement"`
+	Severity        string        `json:"severity,omitempty"` // CAT I/II/III, SL level, etc.
+	BatchIndex      int           `json:"batch_index"`
+	Status          ControlStatus `json:"status"`
+	Response        *Response     `json:"response,omitempty"`
+	ValidationFails int           `json:"validation_fails,omitempty"`
 }
 
 // Response is a single control's assessment response.
 type Response struct {
-	Citation         string          `json:"citation"`
-	CitationQuality  CitationQuality `json:"citation_quality"`
-	Narrative        string          `json:"narrative"`
-	Determination    Determination   `json:"determination"`
-	Gap              string          `json:"gap,omitempty"`
-	RemediationPath  string          `json:"remediation_path,omitempty"`
-	Note             string          `json:"note,omitempty"`
-	InferenceFlags   []string        `json:"inference_flags,omitempty"`
+	Citation        string          `json:"citation"`
+	CitationQuality CitationQuality `json:"citation_quality"`
+	Narrative       string          `json:"narrative"`
+	Determination   Determination   `json:"determination"`
+	Gap             string          `json:"gap,omitempty"`
+	RemediationPath string          `json:"remediation_path,omitempty"`
+	Note            string          `json:"note,omitempty"`
+	InferenceFlags  []string        `json:"inference_flags,omitempty"`
 }
 
 // Batch is a processing unit of controls.
@@ -136,7 +136,7 @@ func (s *AssessmentState) Save(path string) error {
 		return fmt.Errorf("marshaling state: %w", err)
 	}
 	tmp := path + ".tmp"
-	if err := os.WriteFile(tmp, data, 0o644); err != nil {
+	if err := os.WriteFile(tmp, data, 0o600); err != nil {
 		return fmt.Errorf("writing state temp file: %w", err)
 	}
 	if err := os.Rename(tmp, path); err != nil {

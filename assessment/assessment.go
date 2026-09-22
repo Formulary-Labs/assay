@@ -143,7 +143,7 @@ type ValidationResult struct {
 
 // CriterionFailure describes a single failed validation criterion.
 type CriterionFailure struct {
-	Criterion   int    // 1-7
+	Criterion   int // 1-7
 	Description string
 }
 

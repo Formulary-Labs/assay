@@ -105,7 +105,7 @@ func runInit(args []string) {
 	}
 
 	statePath := filepath.Join("data", *program, "assessments", *runID+"-state.json")
-	if err := os.MkdirAll(filepath.Dir(statePath), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(statePath), 0o750); err != nil {
 		fmt.Fprintf(os.Stderr, "error creating state directory: %v\n", err)
 		os.Exit(exit.ToolError)
 	}
@@ -175,18 +175,18 @@ func runBatch(args []string) {
 	controls := s.PendingControls(batch)
 
 	type batchOutput struct {
-		RunID      string                 `json:"run_id"`
-		BatchIndex int                    `json:"batch_index"`
-		Total      int                    `json:"total_batches"`
-		Controls   []*state.ControlEntry  `json:"controls"`
-		Instructions string               `json:"instructions"`
+		RunID        string                `json:"run_id"`
+		BatchIndex   int                   `json:"batch_index"`
+		Total        int                   `json:"total_batches"`
+		Controls     []*state.ControlEntry `json:"controls"`
+		Instructions string                `json:"instructions"`
 	}
 
 	out := batchOutput{
-		RunID:      s.RunID,
-		BatchIndex: batch.Index,
-		Total:      len(s.Batches),
-		Controls:   controls,
+		RunID:        s.RunID,
+		BatchIndex:   batch.Index,
+		Total:        len(s.Batches),
+		Controls:     controls,
 		Instructions: "For each control: fill response.citation, response.citation_quality, response.narrative, response.determination, response.gap (if applicable). Then call: assay validate --state [path] --responses [responses.json]",
 	}
 	printJSON(out)
@@ -365,12 +365,12 @@ func runStatus(args []string) {
 	}
 
 	printJSON(map[string]interface{}{
-		"run_id":       s.RunID,
-		"status":       s.Status,
-		"started":      s.Started,
-		"last_updated": s.LastUpdated,
-		"summary":      s.Summary,
-		"next_batch":   nextBatch,
+		"run_id":        s.RunID,
+		"status":        s.Status,
+		"started":       s.Started,
+		"last_updated":  s.LastUpdated,
+		"summary":       s.Summary,
+		"next_batch":    nextBatch,
 		"total_batches": len(s.Batches),
 	})
 }

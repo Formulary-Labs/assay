@@ -40,11 +40,11 @@ func TestValidateBatch_pass(t *testing.T) {
 		RunID: "test",
 		Controls: map[string]*state.ControlEntry{
 			"SR.1.1": {
-				ID:         "SR.1.1",
-				Title:      "User Identification",
+				ID:          "SR.1.1",
+				Title:       "User Identification",
 				Requirement: "The system shall uniquely identify all users.",
-				BatchIndex: 0,
-				Status:     state.ControlPending,
+				BatchIndex:  0,
+				Status:      state.ControlPending,
 				Response: &state.Response{
 					Citation:        "Product Docs v1.0, Section 4.2.1: \"User Authentication\"",
 					CitationQuality: state.DirectAssertion,
