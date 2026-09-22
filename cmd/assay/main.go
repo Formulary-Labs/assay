@@ -226,7 +226,7 @@ func runValidate(args []string) {
 	}
 
 	// Find the batch these responses belong to. Use the first control ID.
-	var batchIdx int = -1
+	batchIdx := -1
 	for id := range responses {
 		if c, ok := s.Controls[id]; ok {
 			batchIdx = c.BatchIndex

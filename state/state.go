@@ -26,6 +26,7 @@ const (
 // ControlStatus is the per-control processing status.
 type ControlStatus string
 
+//nolint:revive // ControlStatus constants are self-documenting string identifiers.
 const (
 	ControlPending    ControlStatus = "pending"
 	ControlProcessing ControlStatus = "processing"
@@ -36,6 +37,7 @@ const (
 // Determination is the satisfaction determination for a control.
 type Determination string
 
+//nolint:revive // Determination constants are self-documenting string identifiers.
 const (
 	Satisfied          Determination = "satisfied"
 	PartiallySatisfied Determination = "partially_satisfied"
@@ -46,6 +48,7 @@ const (
 // CitationQuality is the quality classification for a citation.
 type CitationQuality string
 
+//nolint:revive // CitationQuality constants are self-documenting string identifiers.
 const (
 	DirectAssertion          CitationQuality = "direct_assertion"
 	TopicalReference         CitationQuality = "topical_reference"
