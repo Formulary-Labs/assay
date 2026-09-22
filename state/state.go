@@ -16,6 +16,7 @@ import (
 // Status is the overall run status.
 type Status string
 
+//nolint:revive // Status constants are self-documenting string identifiers.
 const (
 	StatusPending    Status = "pending"
 	StatusInProgress Status = "in_progress"
