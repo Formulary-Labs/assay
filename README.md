@@ -6,19 +6,52 @@ Every control gets tested. Every response is validated against 7 criteria before
 go get github.com/Formulary-Labs/assay
 ```
 
+## In the ecosystem
+
+Formulary is a **pick-and-choose** suite of small, single-purpose CLIs. Install only the tools your workflow needs; each runs standalone. Shared contracts live in [`substrate`](https://github.com/Formulary-Labs/substrate). Optional Make pipelines (or an agent such as `regimen`) compose tools into a run — plug-and-play, not all-or-nothing.
+
+**This tool:** resumable control assessment with 7-criterion validation.  
+**Works with:** `probe` (catalog gate), `challenge` (interrogate results), `formula` (packet).  
+**Pipeline stage:** assess.
+
+
 ## What it does
 
-`assay` reads a gemara `ControlCatalog` and a directory of product documentation, then works through each control in batches. For each batch, it validates responses against 7 criteria before accepting them. When a run is interrupted, it resumes from the last saved checkpoint — no work is lost. When all batches are complete, it writes three output artifacts.
+`assay` reads an OSCAL catalog or a gemara `ControlCatalog` and a directory of product documentation, then works through each control in batches. For each batch, it validates responses against 7 criteria before accepting them. When a run is interrupted, it resumes from the last saved checkpoint — no work is lost. When all batches are complete, it writes three output artifacts.
 
 ## Input
 
 `assay` requires two inputs:
 
-**A gemara ControlCatalog** (`catalog.yaml`) — the framework document that defines the controls being assessed. Validate it with `probe` before passing it to `assay`.
+**An OSCAL catalog or gemara ControlCatalog** (`catalog.yaml`) — the framework document that defines the controls being assessed. Validate it with `probe` before passing it to `assay`.
 
 **A product documentation directory** — the source materials `assay` reads to find citations for each control. Can be a directory of Markdown, PDF, HTML, or text files.
 
-## Usage
+## CLI
+
+`assay` is a resumable CLI with five subcommands. The agent (or a human assessor) writes narratives; `assay` handles state, validation, and assembly:
+
+```bash
+# 1. Initialize a run from a catalog
+assay init --program my-isms --framework iso27001 \
+  --catalog catalog.yaml --product docs/ --product-name "My Product" --product-version 2.1.0
+
+# 2. Print the next batch of pending controls (for the agent to fill)
+assay batch --state data/my-isms/assessments/<run-id>-state.json
+
+# 3. Validate batch responses against the 7 criteria
+assay validate --state ... --responses batch-responses.json
+
+# 4. Assemble final outputs when all batches complete
+assay assemble --state ... --output-dir output/
+
+# 5. Check run status
+assay status --state ...
+```
+
+Interrupted runs resume from the checkpoint — re-run `init` with the same run ID or pass the existing state file; completed batches are never redone.
+
+## Library usage
 
 ```go
 import "github.com/Formulary-Labs/assay/assessment"
